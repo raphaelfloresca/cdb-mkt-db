@@ -19,4 +19,4 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 images:
-- 'us-central1-docker.pkg.dev/$PROJECT_ID/webhook_to_pubsub/webhook_to_pubsub_image:$COMMIT_SHA'
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/webhook-to-pubsub/webhook-to-pubsub-image:$COMMIT_SHA'
