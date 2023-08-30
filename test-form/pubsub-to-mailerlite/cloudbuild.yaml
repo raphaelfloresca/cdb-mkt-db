@@ -19,6 +19,8 @@ steps:
     - 'us-central1'
     - '--set-secrets'
     - 'SECRET=projects/13410613811/secrets/mailerlite_api_token:latest'
+    - '--service-account'
+    - 'marketing-bd-379302@appspot.gserviceaccount.com'
   dir: 'test-form/pubsub-to-mailerlite'
 options:
   logging: CLOUD_LOGGING_ONLY
