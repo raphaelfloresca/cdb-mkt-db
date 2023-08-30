@@ -2,9 +2,11 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/webhook-to-pubsub/webhook-to-pubsub-image:$COMMIT_SHA', '.' ]
   dir: 'test-form/webhook-to-pubsub'
+  secretEnv: ['SECRET']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/webhook-to-pubsub/webhook-to-pubsub-image:$COMMIT_SHA']
   dir: 'test-form/webhook-to-pubsub'
+  secretEnv: ['SECRET']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args:
