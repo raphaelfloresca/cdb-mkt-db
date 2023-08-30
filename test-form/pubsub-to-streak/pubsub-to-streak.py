@@ -50,7 +50,7 @@ def index():
 streak_headers = {
     "accept": "application/json",
     "Content-Type": "application/json",
-    "authorization": "Basic {}".format(os.env.get('API_KEY'))
+    "authorization": "Basic {}".format(str(os.environ.get('API_KEY')))
 }
 
 
