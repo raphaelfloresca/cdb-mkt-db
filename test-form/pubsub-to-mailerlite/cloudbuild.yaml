@@ -1,0 +1,30 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-mailerlite-image:$COMMIT_SHA', '.' ]
+  dir: 'test-form/pubsub-to-mailerlite'
+  secretEnv: ['API_TOKEN']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-mailerlite-image:$COMMIT_SHA']
+  dir: 'test-form/pubsub-to-mailerlite'
+  secretEnv: ['API_TOKEN']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    - 'run'
+    - 'deploy'
+    - 'pubsub-to-mailerlite'
+    - '--image'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-mailerlite-image:$COMMIT_SHA'
+    - '--region'
+    - 'us-central1'
+    - '--set-secrets'
+    - 'SECRET=projects/13410613811/secrets/mailerlite_api_token:latest'
+  dir: 'test-form/pubsub-to-mailerlite'
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-mailerlite-image:$COMMIT_SHA'
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_ID/secrets/mailerlite_api_token/versions/latest
+    env: 'API_TOKEN'
