@@ -6,13 +6,7 @@ import time
 import urllib
 
 from flask import Flask, request
-
-from google.cloud import secretmanager
 from google.cloud import bigquery
-
-
-# Set secret to dummy value for testing
-os.environ['SECRET'] = 'foo'
 
 
 # Get dataset name and store as an environment variable
