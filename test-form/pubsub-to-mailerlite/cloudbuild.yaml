@@ -17,8 +17,6 @@ steps:
     - 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-mailerlite-image:$COMMIT_SHA'
     - '--region'
     - 'us-central1'
-    - '--memory'
-    - '512Mi'
     - '--set-secrets'
     - 'SECRET=projects/13410613811/secrets/mailerlite_api_token:latest'
     - '--service-account'
