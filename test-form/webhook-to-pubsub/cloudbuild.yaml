@@ -16,6 +16,8 @@ steps:
     - '--region'
     - 'us-central1'
     - '--allow-unauthenticated'
+    - '--set-secrets'
+    - 'SECRET=projects/13410613811/secrets/cdb_test_form_token:latest'
   dir: 'test-form/webhook-to-pubsub'
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -24,4 +26,4 @@ images:
 availableSecrets:
   secretManager:
   - versionName: projects/$PROJECT_ID/secrets/cdb_test_form_token/versions/latest
-    env: 'TOKEN'
+    env: 'SECRET'

@@ -16,18 +16,18 @@ os.environ['TOPIC_NAME'] = topic_name
 
 
 # Get secret name and store as an environment variable
-secret_name = 'cdb_test_form_token'
-os.environ['SECRET_NAME'] = secret_name
+#secret_name = 'cdb_test_form_token'
+#os.environ['SECRET_NAME'] = secret_name
 
 
 # Get secret from secret manager
-def get_secret(project_id, secret_id, version_id):
-    # Returns secret payload from Cloud Secret Manager
-    client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
-    secret = client.access_secret_version(name=name)
-    return secret.payload.data.decode('UTF-8')
-os.environ['SECRET'] = get_secret(os.environ.get('PROJECT_NAME'), os.environ.get('SECRET_NAME', 'latest'), "latest")
+#def get_secret(project_id, secret_id, version_id):
+#    # Returns secret payload from Cloud Secret Manager
+#    client = secretmanager.SecretManagerServiceClient()
+#    name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
+#    secret = client.access_secret_version(name=name)
+#    return secret.payload.data.decode('UTF-8')
+#os.environ['SECRET'] = get_secret(os.environ.get('PROJECT_NAME'), os.environ.get('SECRET_NAME', 'latest'), "latest")
 
 
 # Flask app for webhook
