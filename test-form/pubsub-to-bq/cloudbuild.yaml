@@ -1,0 +1,22 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-bq-image:$COMMIT_SHA', '.' ]
+  dir: 'test-form/pubsub-to-bq'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-bq-image:$COMMIT_SHA']
+  dir: 'test-form/pubsub-to-bq'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    - 'run'
+    - 'deploy'
+    - 'pubsub-to-bq'
+    - '--image'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-bq-image:$COMMIT_SHA'
+    - '--region'
+    - 'us-central1'
+  dir: 'test-form/pubsub-to-bq'
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/cdb-mkt-db/pubsub-to-bq-image:$COMMIT_SHA'
